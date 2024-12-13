@@ -41,7 +41,7 @@ class ProyectosForm extends PublicController{
         if(isset($_GET["mode"]) && isset($this->modeDscArr[$_GET["mode"]])){
             $this ->mode =$_GET["mode"];
         }else{
-            Site::redirectToWithMsg("index.php?page=products-rolesList","Algo sucedio mal! intente de nuevo");
+            Site::redirectToWithMsg("index.php?page=proyectos-proyectosList","Algo sucedio mal! intente de nuevo");
             die();
         }
 
@@ -61,7 +61,9 @@ class ProyectosForm extends PublicController{
     $this->proyectos["ProjectID"]=$_POST["ProjectID"];
     $this->proyectos["ProjectName"]=$_POST["ProjectName"];
     $this->proyectos["StarDate"]=$_POST["StarDate"];
-    
+    $this->proyectos["EndDate"]=$_POST["EndDate"];
+    $this->proyectos["Budget"]=$_POST["Budget"];
+    $this->proyectos["FocusArea"]=$_POST["FocusArea"];
  
     }
 
@@ -70,19 +72,19 @@ class ProyectosForm extends PublicController{
             case 'INS':
                 $result=RolesD::agregarRoles($this->rol);
                 if($result){
-                    Site::redirectToWithMsg("index.php?page=products-rolesList","El rol se registro satisfactoriamente!");
+                    Site::redirectToWithMsg("index.php?page=proyectos-proyectosList","El rol se registro satisfactoriamente!");
                 }
                 break;
             case 'UPD':
                 $result=RolesD::actualizarRoles($this->rol);
                 if($result){
-                    Site::redirectToWithMsg("index.php?page=products-rolesList","El registro del Rol fue actualizado satisfactoriamente!");
+                    Site::redirectToWithMsg("index.php?page=proyectos-proyectosList","El registro del Rol fue actualizado satisfactoriamente!");
                 }
                 break;
             case 'DEL':
                 $result=RolesD::eliminarRoles($this->rol['rolescod']);
                 if($result){
-                    Site::redirectToWithMsg("index.php?page=products-rolesList","El registro del Rol fue eliminado satisfactoriamente!");
+                    Site::redirectToWithMsg("index.php?page=proyectos-proyectosList","El registro del Rol fue eliminado satisfactoriamente!");
                 }
 
                 break;
@@ -92,9 +94,9 @@ class ProyectosForm extends PublicController{
     private function generarViewData(){
         $this->viewData["mode"]=$this->mode;
         $this->viewData["modes_dsc"]=sprintf($this->modeDscArr[$this->mode],
-        $this->rol["rolesdsc"],
-        $this->rol["rolescod"]);
-        $this->viewData["rol"]=$this->rol;
+        $this->proyectos["ProjectID"],
+        $this->proyectos["ProjectNAme"]);
+        $this->viewData["proyecto"]=$this->proyectos;
 
         //Para no poder editar informacion en otras partes que no sea en modo editar
         $this ->viewData["readonly"]=
