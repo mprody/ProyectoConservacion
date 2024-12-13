@@ -11,18 +11,18 @@ use Dao\Proyectos\ProyectosD;
 class ProyectosForm extends PublicController{
     private $viewData=[];
     private $modeDscArr=[
-        "INS"=>"Crear nuevo Rol",
+        "INS"=>"Crear nuevo Proyecto",
         "UPD"=>"Editando %s (%s)",
         "DSP"=>"Detalle de %s (%s)",
         "DEL"=>"Eliminando %s (%s)",
     ];
     private $mode='';
     private $proyectos=[
-    "ProjectID"=> '',
+    "ProjectID"=> 0,
     "ProjectName"=> '',
     "StartDate"=> '',
     "EndDate"=> '',
-    "Budget"=> '',
+    "Budget"=> 0,
     "FocusArea"=> '',
     ];
 
@@ -52,39 +52,38 @@ class ProyectosForm extends PublicController{
     }
 
     private function cargarDatosProyecto(){
-        $tmpProyecto=ProyectosD::obtenerProyectosPorId($this->["ProjectID"]);
+        $tmpProyecto=ProyectosD::obtenerProyectosPorId($this->proyectos["ProjectID"]);
         $this->proyectos =$tmpProyecto;
     }
     
     private function cargarDatosDelFormulario(){
-    
-    $this->proyectos["ProjectID"]=$_POST["ProjectID"];
-    $this->proyectos["ProjectName"]=$_POST["ProjectName"];
-    $this->proyectos["StarDate"]=$_POST["StarDate"];
-    $this->proyectos["EndDate"]=$_POST["EndDate"];
-    $this->proyectos["Budget"]=$_POST["Budget"];
-    $this->proyectos["FocusArea"]=$_POST["FocusArea"];
+        
+        $this->proyectos["ProjectName"]=$_POST["ProjectName"];
+        $this->proyectos["StarDate"]=$_POST["StarDate"];
+        $this->proyectos["EndDate"]=$_POST["EndDate"];
+        $this->proyectos["Budget"]=floatval($_POST["Budget"]);
+        $this->proyectos["FocusArea"]=$_POST["FocusArea"];
  
     }
 
     private function procesarAccion(){
         switch($this->mode){
             case 'INS':
-                $result=RolesD::agregarRoles($this->rol);
+                $result=ProyectosD::agregarProyectos($this->proyectos);
                 if($result){
-                    Site::redirectToWithMsg("index.php?page=proyectos-proyectosList","El rol se registro satisfactoriamente!");
+                    Site::redirectToWithMsg("index.php?page=proyectos-proyectosList","El proyecto se registro satisfactoriamente!");
                 }
                 break;
             case 'UPD':
-                $result=RolesD::actualizarRoles($this->rol);
+                $result=ProyectosD::actualizarProyecto($this->proyectos);
                 if($result){
-                    Site::redirectToWithMsg("index.php?page=proyectos-proyectosList","El registro del Rol fue actualizado satisfactoriamente!");
+                    Site::redirectToWithMsg("index.php?page=proyectos-proyectosList","El registro del proyecto fue actualizado satisfactoriamente!");
                 }
                 break;
             case 'DEL':
-                $result=RolesD::eliminarRoles($this->rol['rolescod']);
+                $result=ProyectosD::eliminarProyecto($this->proyectos['ProjectID']);
                 if($result){
-                    Site::redirectToWithMsg("index.php?page=proyectos-proyectosList","El registro del Rol fue eliminado satisfactoriamente!");
+                    Site::redirectToWithMsg("index.php?page=proyectos-proyectosList","El registro del proyecto fue eliminado satisfactoriamente!");
                 }
 
                 break;
@@ -95,7 +94,7 @@ class ProyectosForm extends PublicController{
         $this->viewData["mode"]=$this->mode;
         $this->viewData["modes_dsc"]=sprintf($this->modeDscArr[$this->mode],
         $this->proyectos["ProjectID"],
-        $this->proyectos["ProjectNAme"]);
+        $this->proyectos["ProjectName"]);
         $this->viewData["proyecto"]=$this->proyectos;
 
         //Para no poder editar informacion en otras partes que no sea en modo editar

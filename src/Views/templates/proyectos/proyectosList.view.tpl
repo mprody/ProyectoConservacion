@@ -9,7 +9,7 @@
                 <th>Dia que finaliza el proyecto</th>
                 <th>Presupuesto</th>
                 <th>Area del proyecto</th>
-                <th><a href="index.php?page=proyecto-proyectosForm&mode=INS"><i class="fa-solid fa-plus"></i></a></th>
+                <th><a href="index.php?page=proyectos-proyectosForm&mode=INS"><i class="fa-solid fa-plus"></i></a></th>
             </tr>
         </thead>
         <tbody>
@@ -22,9 +22,9 @@
                     <td>{{Budget}}</td>
                     <td>{{FocusArea}}</td>
                     <td style="display: flex; gap:1rem; justify-content:center; align-items:center;">
-                        <a href="index.php?page=proyecto-proyectosForm&mode=UPD&ProjectId={{ProjectID}}"> <i class="fa-solid fa-file-pen"></i></a>
-                        <a href="index.php?page=proyecto-proyectosForm&mode=DEL&ProjectId={{ProjectID}}"> <i class="fa-solid fa-trash"></i></i></a>
-                        <a href="index.php?page=proyecto-proyectosForm&mode=DSP&ProjectId={{ProjectID}}"> <i class="fa-solid fa-eye"></i></a>
+                        <a href="index.php?page=proyectos-proyectosForm&mode=UPD&ProjectID={{ProjectID}}"> <i class="fa-solid fa-file-pen"></i></a>
+                        <a href="index.php?page=proyectos-proyectosForm&mode=DEL&ProjectID={{ProjectID}}"> <i class="fa-solid fa-trash"></i></i></a>
+                        <a href="index.php?page=proyectos-proyectosForm&mode=DSP&ProjectID={{ProjectID}}"> <i class="fa-solid fa-eye"></i></a>
                     </td>
                 </tr>
             {{endfor proyectos}}
