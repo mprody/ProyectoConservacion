@@ -59,7 +59,7 @@ class ProyectosForm extends PublicController{
     private function cargarDatosDelFormulario(){
         
         $this->proyectos["ProjectName"]=$_POST["ProjectName"];
-        $this->proyectos["StarDate"]=$_POST["StarDate"];
+        $this->proyectos["StartDate"]=$_POST["StartDate"];
         $this->proyectos["EndDate"]=$_POST["EndDate"];
         $this->proyectos["Budget"]=floatval($_POST["Budget"]);
         $this->proyectos["FocusArea"]=$_POST["FocusArea"];

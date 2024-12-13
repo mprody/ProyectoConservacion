@@ -23,11 +23,11 @@ class ProyectosD extends Table{
         unset($proyecto['creado']);
         unset($proyecto['actualizado']);
         
-
+        
         $sqlstr='insert into conservationprojects (
             ProjectName,StartDate,EndDate,Budget,FocusArea) values
         (
-            :ProjectName,:StartDate, :EndDate, :Budget, :FocusArea
+            :ProjectName, :StartDate, :EndDate, :Budget, :FocusArea
         );';
         
         return self::executeNonQuery($sqlstr,$proyecto);

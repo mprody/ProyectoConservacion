@@ -4,7 +4,7 @@
         {{with proyecto}}
         <div class="row col-8 offset-2">
             <label class="col-4" for="ProjectID">Codigo Proyecto</label>
-            <input class="col-8" type="text" name="ProjectID" id="ProjectID" value="{{ProjectID}}" {{~readonly}}>
+            <input class="col-8" type="text" name="ProjectID" id="ProjectID" value="{{ProjectID}}" {{readonly}}>
         </div>
         <div class="row col-8 offset-2">
             <label class="col-4" for="ProjectName">Nombre del proyecto</label>
